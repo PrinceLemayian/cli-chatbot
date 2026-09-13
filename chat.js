@@ -4,7 +4,13 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import readline from "node:readline/promises";
 import { stdin as input, stdout as output } from "node:process";
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+const apiKey = process.env.GEMINI_API_KEY;
+if (!apiKey || apiKey.trim() === "") {
+  console.error("Missing GEMINI_API_KEY. Add it to your .env file.");
+  process.exit(1);
+}
+
+const genAI = new GoogleGenerativeAI(apiKey);
 const model = genAI.getGenerativeModel({ model: "gemini-3.5-flash-lite" });
 
 const rl = readline.createInterface({ input, output });
