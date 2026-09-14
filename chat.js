@@ -22,6 +22,7 @@ console.log("CLI Chatbot — type 'exit' to quit\n");
 while (true) {
   const userInput = await rl.question("You: ");
 
+  if (userInput.trim() === "") continue;
   if (userInput.trim().toLowerCase() === "exit") break;
 
   let response;
